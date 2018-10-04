@@ -35,7 +35,7 @@ export default {
     },
     data() {
         return {
-            quiz: `물고기는 색을 구분할 수 있다`,
+            quiz: `물고기는 색을 구별할 수 있다.`,
             quizAns: 1,
             description: `물고기는 신호등 정도의 색을 구별할 수 있습니다!`
         };
@@ -52,18 +52,33 @@ export default {
                 node.innerHTML = `<h2>틀렸습니다!</h2><h3>${this.description}</h3>`;
             }
         },
-        async getQuiz () {
+        initDiv() {
             document.getElementById('trueOrFalse').innerHTML = '';
             document.getElementById('trueButton').style.visibility = 'visible';
             document.getElementById('falseButton').style.visibility = 'visible';
-
-            // TODO
-            // fetch DB (await)
-            // get Query `quiz` and `quizAns`
+        },
+        getQuiz () {
+            this.initDiv();
+            //fetch(`http://localhost:3330/quizlist`)
+            fetch(`${process.env.MYSQL_NODE_HOST}/quizlist`)
+                .then((response) => {
+                    if(response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Server Err');
+                })
+                .then((json) => {
+                    this.quiz = json.quiz;
+                    this.quizAns = json.quizAns;
+                    this.description = json.description;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
     },
     beforeUpdate () {
-        this.getQuiz();
+        this.initDiv();
     },
     beforeMount() {
         if(socket.disconnected === true) socket.connect();
