@@ -60,7 +60,7 @@ export default {
         getQuiz () {
             this.initDiv();
             //fetch(`http://localhost:3330/quizlist`)
-            fetch(`http://${process.env.MYSQL_NODE_HOST}/quizlist`)
+            fetch(`http://${this.$MYSQL_NODE_HOST}/quizlist`)
                 .then((response) => {
                     if(response.ok) {
                         return response.json();
@@ -78,7 +78,7 @@ export default {
         }
     },
     created () {
-        console.log('Sang.vue/created:81', process.env.MYSQL_NODE_HOST, this.process.env.MYSQL_NODE_HOST, porcess.env.SOCKET_NODE_HOST);
+        console.log('Sang.vue/created:81', this.$MYSQL_NODE_HOST, this.$SOCKET_NODE_HOST);
     },
     beforeUpdate () {
         this.initDiv();
