@@ -9,4 +9,5 @@ ADD dist/index.html /home/www/index.html
 
 EXPOSE 80
 
-CMD service nginx start
+#CMD service nginx start
+CMD ["nginx", "-g", "daemon off;"]
