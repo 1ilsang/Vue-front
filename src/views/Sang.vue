@@ -60,7 +60,7 @@ export default {
         getQuiz () {
             this.initDiv();
             //fetch(`http://localhost:3330/quizlist`)
-            fetch(`${process.env.MYSQL_NODE_HOST}/quizlist`)
+            fetch(`http://${process.env.MYSQL_NODE_HOST}/quizlist`)
                 .then((response) => {
                     if(response.ok) {
                         return response.json();
