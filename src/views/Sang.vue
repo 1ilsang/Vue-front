@@ -77,6 +77,9 @@ export default {
                 });
         }
     },
+    created () {
+        console.log('Sang.vue/created:81', process.env.MYSQL_NODE_HOST, this.process.env.MYSQL_NODE_HOST, porcess.env.SOCKET_NODE_HOST);
+    },
     beforeUpdate () {
         this.initDiv();
     },
